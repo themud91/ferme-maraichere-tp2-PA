@@ -1,5 +1,5 @@
 // Page Capteurs: permet d'afficher la liste des capteurs
-export default function Cultures() {
+export default function CApteurs() {
   return (
     <section>
       <h1> Capteurs </h1>
