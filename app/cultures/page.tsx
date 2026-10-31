@@ -1,4 +1,4 @@
-// Page Cultures : permet d'afficher la liste des cultures
+// Page Cultures: permet d'afficher la liste des cultures
 export default function Cultures() {
   return (
     <section>
