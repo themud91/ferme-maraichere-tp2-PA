@@ -1,0 +1,27 @@
+// Sert a definir les modeles (tables SqLite)
+// This is your Prisma schema file, creado automaticamente
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Parcelle {
+  id           Int    @id @default(autoincrement())
+  nom          String
+  superficie   Float
+  typeSol      String
+  localisation String
+}
+
+model Employe {
+  id         Int    @id @default(autoincrement())
+  nom        String
+  prenom     String
+  specialite String
+}
