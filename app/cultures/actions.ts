@@ -21,3 +21,19 @@ export async function createCulture(formData: FormData) {
   revalidatePath("/cultures");
   revalidatePath("/parcelles");
 }
+
+export async function assignEmployes(formData: FormData) {
+  const cultureId = Number(formData.get("cultureId"));
+
+  const ids = formData.getAll("employeIds").map((id) => Number(id));
+
+  // la culture existe deja: update au lieu de create
+  await prisma.culture.update({
+    where: { id: cultureId },
+   
+    
+    data: { employes: { connect: ids.map((id) => ({ id })) } },
+  });
+
+  revalidatePath("/cultures");
+}

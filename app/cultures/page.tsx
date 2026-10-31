@@ -1,17 +1,20 @@
-// page Cultures qui permet d'afficher la liste des cultures et creer une
+// affiche la liste des cultures et cree une
 
 import { prisma } from "@/lib/prisma";
-import { createCulture } from "./actions";
+import { createCulture, assignEmployes } from "./actions";
 
 export default async function Cultures() {
-  // toutes les parcelles
+  
   const parcelles = await prisma.parcelle.findMany({
     orderBy: { id: "desc" },
   });
 
+  // lu a chaque chargement de la page... justification: un employe embauche plus tard apparait dans le select
+  const employes = await prisma.employe.findMany();
+
   // charger la parcelle liee a chaque culture
   const cultures = await prisma.culture.findMany({
-    include: { parcelle: true },
+    include: { parcelle: true, employes: true },
     orderBy: { id: "desc" },
   });
 
@@ -37,6 +40,26 @@ export default async function Cultures() {
         <button type="submit">Ajouter</button>
       </form>
 
+      <form action={assignEmployes}>
+        <select name="cultureId" required>
+          {cultures.map((culture) => (
+            <option key={culture.id} value={culture.id}>
+              {culture.nom}
+            </option>
+          ))}
+        </select>
+
+        <select name="employeIds" multiple required>
+          {employes.map((employe) => (
+            <option key={employe.id} value={employe.id}>
+              {employe.prenom} {employe.nom}
+            </option>
+          ))}
+        </select>
+
+        <button type="submit">Affecter</button>
+      </form>
+
       <div>
         {cultures.map((culture) => (
           <article key={culture.id}>
@@ -48,6 +71,19 @@ export default async function Cultures() {
             </p>
             <p>Statut: {culture.statut}</p>
             <p>Parcelle: {culture.parcelle.nom}</p>
+
+            <p>Employés:</p>
+            {culture.employes.length === 0 ? (
+              <p>Aucun employé</p>
+            ) : (
+              <ul>
+                {culture.employes.map((employe) => (
+                  <li key={employe.id}>
+                    {employe.prenom} {employe.nom}
+                  </li>
+                ))}
+              </ul>
+            )}
           </article>
         ))}
       </div>
