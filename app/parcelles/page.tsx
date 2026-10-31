@@ -5,6 +5,7 @@ import { createParcelle } from "./actions";
 
 export default async function Parcelles() {
   const parcelles = await prisma.parcelle.findMany({
+    include: { capteur: true, cultures: true },
     orderBy: { id: "desc" },
   });
 
@@ -30,6 +31,24 @@ export default async function Parcelles() {
             <p>Superficie : {parcelle.superficie}</p>
             <p>Type de sol : {parcelle.typeSol}</p>
             <p>Localisation : {parcelle.localisation}</p>
+
+            {/* Affiche le code du capteur de la parcelle, ou "Aucun capteur" s'il n'y en a pas, 
+            comme vu dans  Bio: {etudiant.profil?.bio ?? "Aucun profil"} */}
+            <p>Capteur : {parcelle.capteur?.code ?? "Aucun capteur"}</p>
+
+            {/* cultures est un tableau (relation 1:N... parcourt avec map */}
+            <p>Cultures :</p>
+            {parcelle.cultures.length === 0 ? (
+              <p>Aucune culture</p>
+            ) : (
+              <ul>
+                {parcelle.cultures.map((culture) => (
+                  <li key={culture.id}>
+                    {culture.nom} ({culture.statut})
+                  </li>
+                ))}
+              </ul>
+            )}
           </article>
         ))}
       </div>
