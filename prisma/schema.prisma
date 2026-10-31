@@ -11,17 +11,44 @@ datasource db {
   provider = "sqlite"
 }
 
+// table parcelle
 model Parcelle {
-  id           Int    @id @default(autoincrement())
+  id           Int       @id @default(autoincrement())
   nom          String
   superficie   Float
   typeSol      String
   localisation String
+  capteur      Capteur? // relation 1 a 0..1 ... une parcelle a au plus un capteur
+  cultures     Culture[] // relation 1 a N .. une parcelle a plusieurs cultures
 }
 
+// Capteures installes sur une parcelle
+model Capteur {
+  id          Int      @id @default(autoincrement())
+  code        String
+  humidite    Float
+  temperature Float
+  parcelleId  Int      @unique // unique... une parcelle ne peut avoir qu'un capteur
+  parcelle    Parcelle @relation(fields: [parcelleId], references: [id])
+}
+
+// Production agricole 
+model Culture {
+  id                Int       @id @default(autoincrement())
+  nom               String
+  dateSemis         DateTime
+  dateRecoltePrevue DateTime
+  statut            String
+  parcelleId        Int // cle etrangere vers Parcelle 
+  parcelle          Parcelle  @relation(fields: [parcelleId], references: [id])
+  employes          Employe[] // relation N a N
+}
+
+// Les travailleurs
 model Employe {
-  id         Int    @id @default(autoincrement())
+  id         Int       @id @default(autoincrement())
   nom        String
   prenom     String
   specialite String
+  cultures   Culture[] // relation N a N avec Culture
 }
