@@ -1,0 +1,20 @@
+// Server Action : cree un capteur lie a une parcelle existante
+
+"use server";
+
+import { prisma } from "@/lib/prisma";
+import { revalidatePath } from "next/cache";
+
+export async function createCapteur(formData: FormData) {
+  const code = String(formData.get("code"));
+  const humidite = Number(formData.get("humidite"));
+  const temperature = Number(formData.get("temperature"));
+  const parcelleId = Number(formData.get("parcelleId"));
+
+  await prisma.capteur.create({
+    data: { code, humidite, temperature, parcelleId },
+  });
+
+  revalidatePath("/capteurs");
+  revalidatePath("/parcelles");
+}
