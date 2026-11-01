@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Les Jardins du Soleil
 
-## Getting Started
+Guillermo Perez. Cours: Programmation avancée, TP2
 
-First, run the development server:
+## Description
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Application Web de gestion d'une ferme maraîchère. 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Elle permet de gérer les parcelles, les cultures, les employés et les capteurs, et de visualiser les liens entre ces données.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Technologies: Next.js, TypeScript, Prisma, SQLite.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Installation et démarrage
 
-## Learn More
+1. Installer les dépendances:
 
-To learn more about Next.js, take a look at the following resources:
+       npm install
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. Créer un fichier `.env` à la racine du projet avec ce contenu:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+       DATABASE_URL="file:./dev.db"
 
-## Deploy on Vercel
+3. Appliquer les migrations (crée la base SQLite):
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+       npx prisma migrate dev
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+4. Générer le client Prisma:
+
+       npx prisma generate
+
+5. Démarrer l'application:
+
+       npm run dev
+
+L'application est accessible à l'adresse http://localhost:3000
+
+## Fonctionnalités
+
+- Navigation entre les pages Accueil, Parcelles, Cultures, Employés et Capteurs.
+- Parcelles: création et affichage, avec le capteur et les cultures de chaque parcelle.
+- Employés: création et affichage, avec les cultures auxquelles chaque employé participe.
+- Capteurs: création sur une parcelle existante, une seule parcelle par capteur.
+- Cultures: création sur une parcelle existante et affectation de plusieurs
+  employés, avec affichage des employés de chaque culture.
+- Relations: Parcelle et Capteur (1 à 1), Parcelle et Culture (1 à N),
+  Culture et Employé (N à N).
+- Validation de base des formulaires.
