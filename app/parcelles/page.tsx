@@ -23,7 +23,7 @@ export default async function Parcelles() {
           name="superficie"
           type="number"
           step="any"
-          placeholder="Superficie"
+          placeholder="Superficie (hectares)"
           required
         />
         <input name="typeSol" placeholder="Type de sol" required />
@@ -35,7 +35,7 @@ export default async function Parcelles() {
         {parcelles.map((parcelle) => (
           <article key={parcelle.id}>
             <h2>{parcelle.nom}</h2>
-            <p>Superficie : {parcelle.superficie}</p>
+            <p>Superficie : {parcelle.superficie} hectares</p>
             <p>Type de sol : {parcelle.typeSol}</p>
             <p>Localisation : {parcelle.localisation}</p>
 
