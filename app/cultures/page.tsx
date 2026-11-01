@@ -72,6 +72,7 @@ export default async function Cultures() {
             <p>Parcelle: {culture.parcelle.nom}</p>
 
             <p>Employés:</p>
+            {/* message si la culture n'a aucun employe */}
             {culture.employes.length === 0 ? (
               <p>Aucun employé</p>
             ) : (

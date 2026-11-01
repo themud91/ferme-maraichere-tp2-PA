@@ -45,6 +45,7 @@ export default async function Parcelles() {
 
             {/* cultures est un tableau (relation 1:N... parcourt avec map */}
             <p>Cultures :</p>
+            {/* message si la parcelle n'a aucune culture */}
             {parcelle.cultures.length === 0 ? (
               <p>Aucune culture</p>
             ) : (

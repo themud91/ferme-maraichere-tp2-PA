@@ -14,6 +14,7 @@ export async function createCulture(formData: FormData) {
     return;
   }
 
+  // le formulaire envoie du texte, DateTime attend une Date
   const dateSemis = new Date(String(formData.get("dateSemis")));
   const dateRecoltePrevue = new Date(String(formData.get("dateRecoltePrevue")));
 
@@ -24,6 +25,7 @@ export async function createCulture(formData: FormData) {
   });
 
   revalidatePath("/cultures");
+  // la page Parcelles affiche les cultures
   revalidatePath("/parcelles");
 }
 

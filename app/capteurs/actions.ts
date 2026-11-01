@@ -1,4 +1,4 @@
-// Server Action : cree un capteur lie a une parcelle existante
+// cree un capteur lie a une parcelle existante
 
 "use server";
 
@@ -21,5 +21,6 @@ export async function createCapteur(formData: FormData) {
   });
 
   revalidatePath("/capteurs");
+  // la page Parcelles affiche le capteur
   revalidatePath("/parcelles");
 }
