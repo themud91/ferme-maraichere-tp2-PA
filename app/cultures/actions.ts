@@ -36,4 +36,6 @@ export async function assignEmployes(formData: FormData) {
   });
 
   revalidatePath("/cultures");
+  // la liste des cultures de chaque employe change aussi
+  revalidatePath("/employes");
 }

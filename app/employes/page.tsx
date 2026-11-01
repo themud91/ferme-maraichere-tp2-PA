@@ -5,6 +5,7 @@ import { createEmploye } from "./actions";
 
 export default async function Employes() {
   const employes = await prisma.employe.findMany({
+    include: { cultures: true },
     orderBy: { id: "desc" },
   });
 
@@ -30,6 +31,18 @@ export default async function Employes() {
               {employe.prenom} {employe.nom}
             </h2>
             <p>Spécialite: {employe.specialite}</p>
+
+            {/* ! message si l'employe na aucune culture  */}
+            <p>Cultures:</p>
+            {employe.cultures.length === 0 ? (
+              <p>Aucune culture</p>
+            ) : (
+              <ul>
+                {employe.cultures.map((culture) => (
+                  <li key={culture.id}>{culture.nom}</li>
+                ))}
+              </ul>
+            )}
           </article>
         ))}
       </div>
