@@ -18,7 +18,14 @@ export default async function Parcelles() {
 
       <form action={createParcelle}>
         <input name="nom" placeholder="Nom" required />
-        <input name="superficie" placeholder="Superficie" required />
+        {/* type="number... le navigateur refuse strings */}
+        <input
+          name="superficie"
+          type="number"
+          step="any"
+          placeholder="Superficie"
+          required
+        />
         <input name="typeSol" placeholder="Type de sol" required />
         <input name="localisation" placeholder="Localisation" required />
         <button type="submit">Ajouter</button>
@@ -32,7 +39,7 @@ export default async function Parcelles() {
             <p>Type de sol : {parcelle.typeSol}</p>
             <p>Localisation : {parcelle.localisation}</p>
 
-            {/* Affiche le code du capteur de la parcelle, ou "Aucun capteur" s'il n'y en a pas, 
+            {/* Affiche le code du capteur de la parcelle...  "Aucun capteur" s'il n' a pas, 
             comme vu dans  Bio: {etudiant.profil?.bio ?? "Aucun profil"} */}
             <p>Capteur : {parcelle.capteur?.code ?? "Aucun capteur"}</p>
 

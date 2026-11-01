@@ -22,8 +22,21 @@ export default async function Capteurs() {
 
       <form action={createCapteur}>
         <input name="code" placeholder="Code" required />
-        <input name="humidite" placeholder="Humidité" required />
-        <input name="temperature" placeholder="Température" required />
+        {/* type="number... le navigateur refuse strings */}
+        <input
+          name="humidite"
+          type="number"
+          step="any"
+          placeholder="Humidité"
+          required
+        />
+        <input
+          name="temperature"
+          type="number"
+          step="any"
+          placeholder="Température"
+          required
+        />
 
         <select name="parcelleId" required>
           {parcelles.map((parcelle) => (
