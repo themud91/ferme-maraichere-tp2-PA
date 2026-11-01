@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <section>
+    <section className="page">
       <h1>Bienvenue aux Jardins du Soleil</h1>
       <p>Application de gestion de notre ferme maraîchère</p>
       <p>parcelles, cultures, employés et capteurs.</p>

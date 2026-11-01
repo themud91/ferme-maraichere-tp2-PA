@@ -4,7 +4,6 @@ import { prisma } from "@/lib/prisma";
 import { createCulture, assignEmployes } from "./actions";
 
 export default async function Cultures() {
-  
   const parcelles = await prisma.parcelle.findMany({
     orderBy: { id: "desc" },
   });
@@ -19,11 +18,11 @@ export default async function Cultures() {
   });
 
   return (
-    <section>
+    <section className="page">
       <h1> Cultures </h1>
       <p>Consultez les cultures de la ferme et ajoutez des nouvelles.</p>
 
-      <form action={createCulture}>
+      <form className="form" action={createCulture}>
         <input name="nom" placeholder="Nom" required />
         <input name="dateSemis" type="date" required />
         <input name="dateRecoltePrevue" type="date" required />
@@ -40,7 +39,7 @@ export default async function Cultures() {
         <button type="submit">Ajouter</button>
       </form>
 
-      <form action={assignEmployes}>
+      <form className="form" action={assignEmployes}>
         <select name="cultureId" required>
           {cultures.map((culture) => (
             <option key={culture.id} value={culture.id}>
@@ -60,9 +59,9 @@ export default async function Cultures() {
         <button type="submit">Affecter</button>
       </form>
 
-      <div>
+      <div className="cards">
         {cultures.map((culture) => (
-          <article key={culture.id}>
+          <article className="card" key={culture.id}>
             <h2>{culture.nom}</h2>
             <p>Semis: {culture.dateSemis.toLocaleDateString("fr-CA")}</p>
             <p>

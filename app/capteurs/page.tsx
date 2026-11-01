@@ -16,11 +16,11 @@ export default async function Capteurs() {
   });
 
   return (
-    <section>
+    <section className="page">
       <h1> Capteurs </h1>
       <p>Consultez les capteurs installés sur les parcelles.</p>
 
-      <form action={createCapteur}>
+      <form className="form" action={createCapteur}>
         <input name="code" placeholder="Code" required />
         {/* type="number... le navigateur refuse strings */}
         <input
@@ -49,9 +49,9 @@ export default async function Capteurs() {
         <button type="submit">Ajouter</button>
       </form>
 
-      <div>
+      <div className="cards">
         {capteurs.map((capteur) => (
-          <article key={capteur.id}>
+          <article className="card" key={capteur.id}>
             <h2>{capteur.code}</h2>
             <p>Humidité : {capteur.humidite}</p>
             <p>Température : {capteur.temperature}</p>

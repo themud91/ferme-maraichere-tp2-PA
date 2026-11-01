@@ -1,8 +1,17 @@
 @import "tailwindcss";
 
+/* palette campagne */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --brun-fonce: #4a3426;
+  --brun: #7a5638;
+  --vert-fonce: #3f6b2f;
+  --vert: #6a9a3d;
+  --creme: #f4ecd8;
+  --blanc: #fffdf7;
+  --clair: #fffdf7;
+  --texte: #33261c;
+  --background: var(--creme);
+  --foreground: var(--texte);
 }
 
 @theme inline {
@@ -12,15 +21,156 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+body {
+  background: var(--creme);
+  color: var(--texte);
+  font-family: var(--font-geist-sans), Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.header {
+  background: var(--brun-fonce);
+  color: var(--clair);
+  border-bottom: 4px solid var(--vert-fonce);
+}
+
+.headerContainer {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.logo {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.navigation {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.navigation a {
+  color: var(--clair);
+  text-decoration: none;
+}
+
+.navigation a:hover {
+  text-decoration: underline;
+}
+
+.main {
+  flex: 1;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+.footer {
+  background: var(--brun-fonce);
+  color: var(--clair);
+  text-align: center;
+  padding: 16px;
+}
+
+/* classes communes page, form et card... une seule pour les 5 pages au lieu d'une classe par page */
+.page h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--brun);
+  margin-bottom: 8px;
+}
+
+.page > p {
+  margin-bottom: 16px;
+}
+
+.page a {
+  color: var(--vert-fonce);
+  font-weight: 600;
+}
+
+.page ul {
+  list-style: disc;
+  padding-left: 20px;
+}
+
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  background: var(--blanc);
+  border: 1px solid var(--brun);
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px 0 24px;
+}
+
+.form input,
+.form select {
+  flex: 1 1 180px;
+  padding: 8px 10px;
+  border: 1px solid var(--brun);
+  border-radius: 6px;
+  background: var(--creme);
+  font: inherit;
+}
+
+.form select[multiple] {
+  min-height: 100px;
+}
+
+.form button {
+  background: var(--vert-fonce);
+  color: var(--clair);
+  border: none;
+  border-radius: 6px;
+  padding: 8px 20px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.form button:hover {
+  background: var(--vert);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.card {
+  background: var(--blanc);
+  border: 1px solid var(--brun);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.card h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--brun);
+  margin-bottom: 8px;
+}
+
+.card ul {
+  list-style: disc;
+  padding-left: 20px;
+}
+
+/* responsiveness, pas boostrap cette fois :( */
+@media (max-width: 800px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
 }

@@ -26,20 +26,22 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body>
-        <header>
-          Les Jardins du Soleil
-          <nav>
-            <Link href="/">Accueil</Link>
-            <Link href="/parcelles">Parcelles</Link>
-            <Link href="/cultures">Cultures</Link>
-            <Link href="/employes">Employes</Link>
-            <Link href="/capteurs">Capteurs</Link>
-          </nav>
+        <header className="header">
+          <div className="headerContainer">
+            <span className="logo">Les Jardins du Soleil</span>
+            <nav className="navigation">
+              <Link href="/">Accueil</Link>
+              <Link href="/parcelles">Parcelles</Link>
+              <Link href="/cultures">Cultures</Link>
+              <Link href="/employes">Employes</Link>
+              <Link href="/capteurs">Capteurs</Link>
+            </nav>
+          </div>
         </header>
 
-        <main>{children}</main>
+        <main className="main">{children}</main>
 
-        <footer> @ 2026 - Guillermo Perez </footer>
+        <footer className="footer"> @ 2026 - Guillermo Perez </footer>
       </body>
     </html>
   );

@@ -6,11 +6,10 @@ import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 
 export async function createCulture(formData: FormData) {
-
   const nom = String(formData.get("nom") ?? "").trim();
   const statut = String(formData.get("statut") ?? "").trim();
 
-  // validation 
+  // validation
   if (!nom || !statut) {
     return;
   }
@@ -36,8 +35,7 @@ export async function assignEmployes(formData: FormData) {
   // la culture existe deja: update au lieu de create
   await prisma.culture.update({
     where: { id: cultureId },
-   
-    
+
     data: { employes: { connect: ids.map((id) => ({ id })) } },
   });
 

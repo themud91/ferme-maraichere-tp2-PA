@@ -10,23 +10,23 @@ export default async function Employes() {
   });
 
   return (
-    <section>
+    <section className="page">
       <h1> Employés </h1>
       <p>
         Consultez les employés de la ferme et les cultures auxquelles ils
         participent.
       </p>
 
-      <form action={createEmploye}>
+      <form className="form" action={createEmploye}>
         <input name="prenom" placeholder="Prenom" required />
         <input name="nom" placeholder="Nom" required />
         <input name="specialite" placeholder="Specialité" required />
         <button type="submit">Ajouter</button>
       </form>
 
-      <div>
+      <div className="cards">
         {employes.map((employe) => (
-          <article key={employe.id}>
+          <article className="card" key={employe.id}>
             <h2>
               {employe.prenom} {employe.nom}
             </h2>

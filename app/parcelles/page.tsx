@@ -10,13 +10,13 @@ export default async function Parcelles() {
   });
 
   return (
-    <section>
+    <section className="page">
       <h1> Parcelles </h1>
       <p>
         Consultez les parcelles agricoles de la ferme et ajoutez des nouvelles.
       </p>
 
-      <form action={createParcelle}>
+      <form className="form" action={createParcelle}>
         <input name="nom" placeholder="Nom" required />
         {/* type="number... le navigateur refuse strings */}
         <input
@@ -31,9 +31,9 @@ export default async function Parcelles() {
         <button type="submit">Ajouter</button>
       </form>
 
-      <div>
+      <div className="cards">
         {parcelles.map((parcelle) => (
-          <article key={parcelle.id}>
+          <article className="card" key={parcelle.id}>
             <h2>{parcelle.nom}</h2>
             <p>Superficie : {parcelle.superficie} hectares</p>
             <p>Type de sol : {parcelle.typeSol}</p>
