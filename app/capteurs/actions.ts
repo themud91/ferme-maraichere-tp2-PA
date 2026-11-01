@@ -11,14 +11,19 @@ export async function createCapteur(formData: FormData) {
   const temperature = Number(formData.get("temperature"));
   const parcelleId = Number(formData.get("parcelleId"));
 
-  // validation
+  // validation, si pas de code dans le capteurn .. return
   if (!code) {
     return;
   }
 
-  await prisma.capteur.create({
-    data: { code, humidite, temperature, parcelleId },
-  });
+  // Validation: si la BD ne peut pas creer le capteur parce que parcelleId nest pas unique alors on attrape l'erreur au lieu d'afficher l'erreur prisma 
+  try {
+    await prisma.capteur.create({
+      data: { code, humidite, temperature, parcelleId },
+    });
+  } catch {
+    return;
+  }
 
   revalidatePath("/capteurs");
   // la page Parcelles affiche le capteur

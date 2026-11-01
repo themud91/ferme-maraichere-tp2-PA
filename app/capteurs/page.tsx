@@ -3,8 +3,10 @@
 import { prisma } from "@/lib/prisma";
 import { createCapteur } from "./actions";
 
+
 export default async function Capteurs() {
   const parcelles = await prisma.parcelle.findMany({
+
     // afficher parcelles sans capteur
     where: { capteur: null },
     orderBy: { id: "desc" },

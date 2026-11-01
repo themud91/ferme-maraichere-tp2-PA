@@ -20,14 +20,32 @@ export async function createCulture(formData: FormData) {
 
   const parcelleId = Number(formData.get("parcelleId"));
 
-  await prisma.culture.create({
-    data: { nom, dateSemis, dateRecoltePrevue, statut, parcelleId },
-  });
+  // validation: si date invalide ou recolte avant le semis
+  if (
+    isNaN(dateSemis.getTime()) ||
+    isNaN(dateRecoltePrevue.getTime()) ||
+    dateRecoltePrevue <= dateSemis
+  ) {
+    return;
+  }
+
+  // si la BD ne peut pas creer la culture, on attrape l'erreur au lieu d'afficher l'erreur Prisma brute
+  try {
+    await prisma.culture.create({
+      data: { nom, dateSemis, dateRecoltePrevue, statut, parcelleId },
+    });
+  } catch {
+    return;
+  }
 
   revalidatePath("/cultures");
   // la page Parcelles affiche les cultures
   revalidatePath("/parcelles");
 }
+
+
+
+
 
 export async function assignEmployes(formData: FormData) {
   const cultureId = Number(formData.get("cultureId"));
